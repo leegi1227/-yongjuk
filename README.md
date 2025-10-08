@@ -1,92 +1,142 @@
-이 프로젝트는 [`EasyNext`](https://github.com/easynext/easynext)를 사용해 생성된 [Next.js](https://nextjs.org) 프로젝트입니다.
+# 건폐율/용적률 현황 조회 시스템
 
-## Getting Started
+2024년 기준 전국 도시의 건폐율/용적률 현황을 조회할 수 있는 모바일 친화적 웹 애플리케이션입니다.
 
-개발 서버를 실행합니다.<br/>
-환경에 따른 명령어를 사용해주세요.
+## 주요 기능
 
+### 🔍 검색 기능
+- **지역별 검색**: 전국 17개 시도별로 필터링
+- **용도지역별 검색**: 전용주거지역, 일반주거지역, 상업지역, 공업지역 등
+- **세부 용도지역별 검색**: 제1종전용주거, 중심상업, 전용공업 등 상세 분류
+- **건폐율/용적률 범위 검색**: 최소/최대 값으로 범위 설정
+- **실시간 필터링**: 검색 조건 변경 시 즉시 결과 반영
+
+### 📊 통계 정보
+- **전체 도시 수**: 데이터에 포함된 도시 개수
+- **평균 건폐율/용적률**: 전체 데이터의 평균값
+- **최대/최소 값**: 건폐율과 용적률의 최대/최소값
+- **시각적 표시**: 색상으로 구분된 통계 카드
+
+### 📱 모바일 최적화
+- **반응형 디자인**: 모바일, 태블릿, 데스크톱 모든 기기 지원
+- **터치 친화적 UI**: 모바일에서 쉽게 조작 가능한 버튼과 입력 필드
+- **최적화된 레이아웃**: 작은 화면에서도 정보를 효율적으로 표시
+
+## 기술 스택
+
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **Styling**: Tailwind CSS
+- **UI Components**: Radix UI + shadcn/ui
+- **Icons**: Lucide React
+- **Data Processing**: CSV 파싱 및 변환
+
+## 설치 및 실행
+
+### 1. 의존성 설치
+```bash
+npm install
+```
+
+### 2. 개발 서버 실행
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-브라우저에서 [http://localhost:3000](http://localhost:3000)을 열어 결과를 확인할 수 있습니다.
-
-`app/page.tsx` 파일을 수정하여 페이지를 편집할 수 있습니다. 파일을 수정하면 자동으로 페이지가 업데이트됩니다.
-
-## 기본 포함 라이브러리
-
-- [Next.js](https://nextjs.org)
-- [React](https://react.dev)
-- [Tailwind CSS](https://tailwindcss.com)
-- [TypeScript](https://www.typescriptlang.org)
-- [ESLint](https://eslint.org)
-- [Prettier](https://prettier.io)
-- [Shadcn UI](https://ui.shadcn.com)
-- [Lucide Icon](https://lucide.dev)
-- [date-fns](https://date-fns.org)
-- [react-use](https://github.com/streamich/react-use)
-- [es-toolkit](https://github.com/toss/es-toolkit)
-- [Zod](https://zod.dev)
-- [React Query](https://tanstack.com/query/latest)
-- [React Hook Form](https://react-hook-form.com)
-- [TS Pattern](https://github.com/gvergnaud/ts-pattern)
-
-## 사용 가능한 명령어
-
-한글버전 사용
-
-```sh
-easynext lang ko
+### 3. 브라우저에서 확인
+```
+http://localhost:3000
 ```
 
-최신버전으로 업데이트
+## 데이터 구조
 
-```sh
-npm i -g @easynext/cli@latest
-# or
-yarn add -g @easynext/cli@latest
-# or
-pnpm add -g @easynext/cli@latest
+### 지원하는 용도지역
+- **전용주거지역**: 제1종전용주거, 제2종전용주거
+- **일반주거지역**: 제1종일반주거, 제2종일반주거, 제3종일반주거
+- **준주거지역**: 준주거
+- **상업지역**: 중심상업, 일반상업, 근린상업, 유통상업
+- **공업지역**: 전용공업, 일반공업, 준공업
+- **녹지지역**: 보전녹지, 생산녹지, 자연녹지
+- **관리지역**: 보전관리, 생산관리, 계획관리
+- **농림지역**: 농림
+- **자연환경보전지역**: 자연환경보전
+
+### 지원하는 지역
+- 서울특별시, 부산광역시, 대구광역시, 인천광역시
+- 광주광역시, 대전광역시, 울산광역시, 세종특별자치시
+- 경기도, 강원특별자치도, 충청북도, 충청남도
+- 전북특별자치도, 전라남도, 경상북도, 경상남도, 제주특별자치도
+
+## 사용 방법
+
+### 1. 검색하기
+1. **검색** 탭을 선택합니다
+2. 원하는 검색 조건을 설정합니다:
+   - 지역 선택
+   - 용도지역 선택
+   - 세부 용도지역 선택
+   - 건폐율/용적률 범위 설정
+3. **검색** 버튼을 클릭합니다
+4. 결과를 확인합니다
+
+### 2. 통계 보기
+1. **통계** 탭을 선택합니다
+2. 전체 데이터의 통계 정보를 확인합니다
+
+### 3. 필터 초기화
+- **초기화** 버튼을 클릭하여 모든 검색 조건을 초기화합니다
+
+## 프로젝트 구조
+
+```
+src/
+├── app/
+│   ├── page.tsx              # 메인 페이지
+│   ├── layout.tsx            # 레이아웃
+│   └── globals.css           # 전역 스타일
+├── components/
+│   ├── ui/                   # 기본 UI 컴포넌트
+│   ├── building-ratio-card.tsx    # 건폐율/용적률 카드
+│   ├── search-filters.tsx         # 검색 필터
+│   ├── search-results.tsx         # 검색 결과
+│   └── statistics-panel.tsx       # 통계 패널
+├── lib/
+│   └── data-parser.ts        # CSV 데이터 파싱
+├── types/
+│   └── building.ts           # TypeScript 타입 정의
+└── hooks/
+    └── use-toast.ts          # 토스트 훅
 ```
 
-Supabase 설정
+## 개발 가이드
 
-```sh
-easynext supabase
-```
+### 컴포넌트 개발
+- 모든 컴포넌트는 TypeScript로 작성
+- Props 인터페이스 정의 필수
+- 모바일 친화적 디자인 적용
+- 접근성 고려
 
-Next-Auth 설정
+### 스타일링
+- Tailwind CSS 사용
+- 반응형 디자인 (sm:, md:, lg: 브레이크포인트)
+- 일관된 색상 팔레트 사용
 
-```sh
-easynext auth
+### 데이터 처리
+- CSV 데이터는 public 폴더에 위치
+- 비동기 데이터 로딩
+- 에러 처리 포함
 
-# ID,PW 로그인
-easynext auth idpw
-# 카카오 로그인
-easynext auth kakao
-```
+## 라이선스
 
-유용한 서비스 연동
+이 프로젝트는 MIT 라이선스 하에 배포됩니다.
 
-```sh
-# Google Analytics
-easynext gtag
+## 기여하기
 
-# Microsoft Clarity
-easynext clarity
+1. 이 저장소를 포크합니다
+2. 새로운 기능 브랜치를 생성합니다 (`git checkout -b feature/새기능`)
+3. 변경사항을 커밋합니다 (`git commit -am '새 기능 추가'`)
+4. 브랜치에 푸시합니다 (`git push origin feature/새기능`)
+5. Pull Request를 생성합니다
 
-# ChannelIO
-easynext channelio
+## 문의사항
 
-# Sentry
-easynext sentry
-
-# Google Adsense
-easynext adsense
-```
+프로젝트에 대한 문의사항이나 버그 리포트는 이슈를 통해 제출해주세요.
