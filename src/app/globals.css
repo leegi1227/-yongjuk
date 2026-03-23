@@ -62,8 +62,31 @@
 @layer base {
   * {
     @apply border-border;
+    user-select: text !important;
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
   }
   body {
     @apply bg-background text-foreground;
+    user-select: text !important;
+    -webkit-user-select: text !important;
   }
+  html, body, div, span, p, h1, h2, h3, h4, h5, h6, main, header, footer, nav, section, article {
+    user-select: text !important;
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+  }
+}
+
+/* 브라우저 확장 프로그램의 style 속성을 덮어쓰기 위한 최우선 규칙 */
+* {
+  user-select: text !important;
+  -webkit-user-select: text !important;
+}
+
+div[style*="user-select"] {
+  user-select: text !important;
+  -webkit-user-select: text !important;
 }

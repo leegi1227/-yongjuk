@@ -13,6 +13,7 @@ import { SearchFilter, Region, LandUseType, DetailedLandUseType } from '@/types/
 
 interface SearchFiltersProps {
   filters: SearchFilter;
+  sigunguOptions: string[];
   onFiltersChange: (filters: SearchFilter) => void;
   onSearch: () => void;
   onReset: () => void;
@@ -57,6 +58,7 @@ const DETAILED_LAND_USE_TYPES: DetailedLandUseType[] = [
   '제1종일반주거',
   '제2종일반주거',
   '제3종일반주거',
+  '준주거',
   '중심상업',
   '일반상업',
   '근린상업',
@@ -69,21 +71,31 @@ const DETAILED_LAND_USE_TYPES: DetailedLandUseType[] = [
   '자연녹지',
   '보전관리',
   '생산관리',
-  '계획관리'
+  '계획관리',
+  '농림',
+  '자연환경보전'
 ];
 
 export function SearchFilters({
   filters,
+  sigunguOptions,
   onFiltersChange,
   onSearch,
   onReset,
   className = ''
 }: SearchFiltersProps) {
   const handleFilterChange = (key: keyof SearchFilter, value: any) => {
-    onFiltersChange({
-      ...filters,
-      [key]: value === '전체' ? undefined : value
-    });
+    const normalized = value === '전체' ? undefined : value;
+    // 지역 변경 시 시군구 초기화
+    if (key === 'region') {
+      onFiltersChange({
+        ...filters,
+        region: normalized as any,
+        sigungu: undefined
+      });
+      return;
+    }
+    onFiltersChange({ ...filters, [key]: normalized as any });
   };
 
   const handleNumberChange = (key: 'minBuildingRatio' | 'maxBuildingRatio' | 'minFloorAreaRatio' | 'maxFloorAreaRatio', value: string) => {
@@ -97,10 +109,13 @@ export function SearchFilters({
   return (
     <Card className={`w-full ${className}`}>
       <CardHeader className="pb-3 px-3 sm:px-6">
-        <CardTitle className="text-base sm:text-lg font-semibold flex items-center gap-2">
-          <Search className="w-4 h-4 sm:w-5 sm:h-5" />
-          검색 필터
-        </CardTitle>
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-base sm:text-lg font-semibold flex items-center gap-2">
+            <Search className="w-4 h-4 sm:w-5 sm:h-5" />
+            검색 필터
+          </CardTitle>
+          <p className="text-xs text-gray-500">※ 조건 선택 후 검색 버튼을 클릭하세요</p>
+        </div>
       </CardHeader>
       <CardContent className="space-y-3 sm:space-y-4 px-3 sm:px-6 pb-3 sm:pb-6">
         {/* 지역 선택 */}
@@ -120,6 +135,29 @@ export function SearchFilters({
               {REGIONS.map((region) => (
                 <SelectItem key={region} value={region}>
                   {region}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        {/* 시군구 선택 */}
+        <div className="space-y-2">
+          <Label htmlFor="sigungu" className="text-sm font-medium">
+            시군구
+          </Label>
+          <Select
+            value={filters.sigungu || '전체'}
+            onValueChange={(value) => handleFilterChange('sigungu', value)}
+          >
+            <SelectTrigger id="sigungu" className="w-full">
+              <SelectValue placeholder="시군구를 선택하세요" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="전체">전체</SelectItem>
+              {sigunguOptions.map((name) => (
+                <SelectItem key={name} value={name}>
+                  {name}
                 </SelectItem>
               ))}
             </SelectContent>

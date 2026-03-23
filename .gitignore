@@ -34,3 +34,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# screenshots and data files
+*.png
+*.jpg
+*.jpeg
+*.xlsx
+*.xls
+# screenshots and data files
+*.png
+*.jpg
+*.jpeg
+*.xlsx
+*.xls

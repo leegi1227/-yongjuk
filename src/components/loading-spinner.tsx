@@ -17,8 +17,8 @@ export function LoadingSpinner({ size = 'md', className = '' }: LoadingSpinnerPr
   };
 
   return (
-    <div className={`flex items-center justify-center ${className}`}>
-      <div className={`animate-spin rounded-full border-b-2 border-blue-600 ${sizeClasses[size]}`}></div>
+    <div className={`flex items-center justify-center ${className}`} suppressHydrationWarning>
+      <div className={`animate-spin rounded-full border-b-2 border-blue-600 ${sizeClasses[size]}`} suppressHydrationWarning></div>
     </div>
   );
 }

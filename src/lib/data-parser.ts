@@ -89,12 +89,12 @@ export async function parseBuildingData(): Promise<CityBuildingData[]> {
     const csvText = await response.text();
     const csvData = parseCSV(csvText);
     const result: CityBuildingData[] = [];
-    
+
     // 헤더 행들을 건너뛰고 데이터 행부터 처리 (5행부터)
     for (let i = 5; i < csvData.length; i++) {
       const row = csvData[i];
-      if (row.length < 42 || !row[0] || row[0].trim() === '') continue;
-      
+      if (row.length < 43 || !row[0] || row[0].trim() === '') continue;
+
       const cityName = row[0].trim();
       if (cityName === '도시명' || cityName.includes('도') || cityName === '') continue;
       
@@ -146,7 +146,7 @@ export async function parseBuildingData(): Promise<CityBuildingData[]> {
       
       result.push(cityData);
     }
-    
+
     return result;
   } catch (error) {
     console.error('CSV 데이터 로드 중 오류 발생:', error);

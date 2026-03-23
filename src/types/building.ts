@@ -117,6 +117,7 @@ export interface CityBuildingData {
 // 검색 필터 타입
 export interface SearchFilter {
   region?: Region;
+  sigungu?: string;
   landUseType?: LandUseType;
   detailedLandUseType?: DetailedLandUseType;
   minBuildingRatio?: number;
